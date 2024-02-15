@@ -1,0 +1,3 @@
+### Description
+
+An immersive web application designed to unlock the treasures of the Yale University Art Gallery's vast collection. Allows seamless navigation through centuries of artistry with precision, whether seeking pieces by date, creator, ownership, or historical significance. Uncover rich details, stories, and context behind each masterpiece. Experience a sleek and intuitive interface, ensuring effortless exploration and deep engagement with every click.
