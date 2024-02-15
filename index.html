@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>YUAG Search Application</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/styles.css">
+    </head>
+    <body>
+        <h1>YUAG search application</h1>
+        <form id="formid" action="/search" method="get">
+            <label>Label</label>
+            <input name="l" id="label-in" placeholder="Type Label Here" value="{{ props.label }}"/>
+            <label>Date</label>
+            <input name="d" id="date-in" placeholder="Type Date Here" value="{{ props.date }}"/>
+            <label>Agent</label>
+            <input name="a" id="agent-in" placeholder="Type Agent Here" value="{{ props.agent }}"/>
+            <label>Classifier</label>
+            <input name="c" id="cls-in" placeholder="Type Classifier Here" value="{{ props.classifier }}"/>
+        </form>
+        <div id="results">
+            {{ props.table | safe }}
+        </div>
+        <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            function handleResponse(response){
+                $("#results").empty()
+                $("#results").append(response)
+            }
+
+            let request = null;
+            function getResults(){
+                let url = '/search?'
+                url += "l=" + encodeURIComponent($("#label-in").val()) + "&"
+                url += "d=" + encodeURIComponent($("#date-in").val()) + "&"
+                url += "a=" + encodeURIComponent($("#agent-in").val()) + "&"
+                url += "c=" + encodeURIComponent($("#cls-in").val())
+                console.log(url)
+                console.log(url)
+
+                if (request != null)
+                request.abort();
+
+                request = $.ajax(
+                {
+                    type: 'GET',
+                    url: url,
+                    success: handleResponse
+                }
+                );
+            }
+
+            function setup(){
+                getResults()
+                $("#label-in").on("input", getResults)
+                $("#date-in").on("input", getResults)
+                $("#agent-in").on("input", getResults)
+                $("#cls-in").on("input", getResults)
+            }
+            document.addEventListener("DOMContentLoaded", setup)
+        </script>
+    </body>
+</html>

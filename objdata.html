@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Object Data</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+    </head>
+    <body>
+        <a href="/">Go back</a>
+        <h1>Summary</h1>
+        <table>
+            <tr>
+                <th>Accession No.</th>
+                <th>Date</th>
+                <th>Place</th>
+                <th>Department</th>
+            </tr>
+            <tr>
+            {% for entry in props.results['summary'][0] %}
+                <td>
+                    {% if entry != " " %}
+                    {{ entry }}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+            {% endfor %}   
+            </tr>
+        </table>
+
+        <h1>Label</h1>
+        <p>{{props.results['label'][0][0]}}</p>
+        
+        <h1>Produced By</h1>
+        <table>
+            <tr>
+                <th>Part</th>
+                <th>Name</th>
+                <th>Nationalities</th>
+                <th>Timespan</th>
+            </tr>
+            {% for entry in props.results['production'] %}
+            <tr>
+                <td>{{ entry[0] }}</td>
+                <td>{{ entry[1] }}</td>
+                <td>
+                    {% if entry[2] %}
+                    {% for nat in entry[2].split(',') %}
+                    {{ nat }}<br/>
+                    {% endfor %}
+                    {% else %}
+                    None
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entry[3] != " " %}
+                    {{ entry[3] }}
+                    {% else %}
+                    N/A
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}   
+        </table>
+
+        <div class="img-container" style="display: none">
+            <h1>Image</h1>
+            <img src="{{ props.imgUrl }}" onload="this.parentNode.style.display='block'">
+        </div>
+
+        <div class="cls-container">
+            <h1>Classified As</h1>
+            <ul>
+                {% for cls in props.results['classifier']%}
+                <li>{{ cls[0] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="cls-container">
+            <h1>Informations</h1>
+            <ul>
+                {% for ref in props.results['reference']%}
+                <li><strong>{{ ref[0] }}:</strong> {{ ref[1] | safe }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

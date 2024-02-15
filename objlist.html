@@ -1,0 +1,26 @@
+<div>
+    <table>
+        <tr>
+            <th>Label</th>
+            <th>Date</th>
+            <th>Agents</th>
+            <th>Classified As</th>
+        </tr>
+    {% for entry in props.results %}
+        <tr>
+            <td style="max-width: 300px;"><a target="_blank" href="{{ url_for('obj', obj_id=entry[0]) }}">{{ entry[1] }}</a></td>
+            <td>{{ entry[2] }}</td>
+            <td>
+                {% for agent in entry[3].split(',') %}
+                {{ agent }}<br/>
+                {% endfor %}
+            </td>
+            <td>
+                {% for classifier in entry[4].split(',') %}
+                {{ classifier }}<br/>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>

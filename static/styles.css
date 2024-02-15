@@ -1,0 +1,42 @@
+h1{
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    margin: auto;
+    max-width: 60%;
+}
+th{
+    border: 1px solid gray;
+    background-color: lightgray;
+    padding: 5px;
+}
+td{
+    border: 1px solid gray;
+    padding: 5px;
+}
+.img-container{
+    text-align: center;
+}
+.cls-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 60%;
+    margin: auto;
+}
+
+#results{
+    margin-top: 20px;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+td:hover{
+    background-color: lightgray;
+}
